@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>課程報名 | Google Nano Banana Pro</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slate: { 950: '#020617' }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+        .glass-panel {
+            background-color: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        /* Custom Radio Button Styling */
+        input[type="radio"]:checked + div {
+            border-color: #FACC15;
+            background-color: rgba(250, 204, 21, 0.1);
+        }
+        input[type="radio"]:checked + div .check-icon {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-200 min-h-screen py-12 px-4 selection:bg-yellow-400 selection:text-slate-900">
+
+    <div class="max-w-3xl mx-auto">
+        
+        <!-- Header / Branding -->
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center gap-2 text-yellow-400 font-bold text-xl mb-2">
+                <i data-lucide="zap" class="w-5 h-5"></i>
+                <span>電商神助手</span>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Google Nano Banana Pro <br/> 課程報名表</h1>
+            <p class="text-slate-400">請填寫以下資訊以完成報名，我們將盡快與您聯繫確認。</p>
+        </div>
+
+        <form id="registrationForm" class="space-y-8" onsubmit="handleSubmit(event)">
+            
+            <!-- Section 1: Course Info Summary -->
+            <div class="glass-panel rounded-2xl p-6 md:p-8 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1 h-full bg-yellow-400"></div>
+                <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                    <i data-lucide="info" class="text-yellow-400 w-5 h-5"></i> 課程資訊
+                </h2>
+                <div class="grid md:grid-cols-2 gap-6 text-sm">
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="calendar" class="w-5 h-5 text-slate-400 mt-0.5"></i>
+                        <div>
+                            <span class="block text-slate-400">時間</span>
+                            <strong class="text-white text-lg">待公告</strong>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="map-pin" class="w-5 h-5 text-slate-400 mt-0.5"></i>
+                        <div>
+                            <span class="block text-slate-400">地點</span>
+                            <strong class="text-white text-lg">辰巳珈琲</strong>
+                            <div class="text-slate-300 mt-1">401臺中市東區旱溪街44號</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="banknote" class="w-5 h-5 text-slate-400 mt-0.5"></i>
+                        <div>
+                            <span class="block text-slate-400">費用</span>
+                            <strong class="text-yellow-400 text-lg">NT$ 500 / 人</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Personal Info -->
+            <div class="glass-panel rounded-2xl p-6 md:p-8">
+                <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                    <i data-lucide="user" class="text-yellow-400 w-5 h-5"></i> 報名資料
+                </h2>
+                
+                <div class="grid gap-6">
+                    <!-- Name & Phone -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-400 mb-2">真實姓名 (大名) *</label>
+                            <input type="text" name="name" required placeholder="王大明" 
+                                class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-400 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-400 mb-2">手機號碼 *</label>
+                            <input type="tel" name="phone" required placeholder="0912-345-678" 
+                                class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-400 transition-colors">
+                        </div>
+                    </div>
+
+                    <!-- LINE ID & Email -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-400 mb-2">LINE ID *</label>
+                            <input type="text" name="line_id" required placeholder="請輸入 LINE ID" 
+                                class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-400 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-400 mb-2">Email (接收行前通知) *</label>
+                            <input type="email" name="email" required placeholder="name@example.com" 
+                                class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-400 transition-colors">
+                        </div>
+                    </div>
+
+                    <!-- Quantity -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-400 mb-2">報名人數</label>
+                        <div class="flex items-center gap-4">
+                            <button type="button" onclick="updateQuantity(-1)" class="w-10 h-10 rounded-lg bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-white border border-slate-600 transition-colors"><i data-lucide="minus" class="w-4 h-4"></i></button>
+                            <span id="quantityDisplay" class="text-xl font-bold w-8 text-center">1</span>
+                            <button type="button" onclick="updateQuantity(1)" class="w-10 h-10 rounded-lg bg-yellow-400 hover:bg-yellow-300 flex items-center justify-center text-slate-900 font-bold transition-colors"><i data-lucide="plus" class="w-4 h-4"></i></button>
+                            <input type="hidden" id="quantityInput" name="quantity" value="1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Payment Method -->
+            <div class="glass-panel rounded-2xl p-6 md:p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i data-lucide="credit-card" class="text-yellow-400 w-5 h-5"></i> 付款方式
+                    </h2>
+                    <div class="text-right">
+                        <span class="text-sm text-slate-400">總金額</span>
+                        <div class="text-2xl font-bold text-yellow-400">NT$ <span id="totalPrice">500</span></div>
+                        <input type="hidden" id="totalPriceInput" name="total_price" value="500">
+                    </div>
+                </div>
+
+                <div class="grid gap-4 mb-6">
+                    <!-- ATM Option -->
+                    <label class="cursor-pointer relative group">
+                        <input type="radio" name="payment" value="atm" checked onchange="updatePaymentInfo()" class="peer sr-only">
+                        <div class="p-4 rounded-xl border border-slate-700 bg-slate-900 hover:border-slate-500 transition-all flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300">
+                                    <i data-lucide="landmark" class="w-5 h-5"></i>
+                                </div>
+                                <span class="font-medium">ATM 轉帳 / 銀行匯款</span>
+                            </div>
+                            <i data-lucide="check-circle-2" class="check-icon w-6 h-6 text-yellow-400 opacity-0 transition-opacity"></i>
+                        </div>
+                    </label>
+
+                    <!-- LINE Pay Option -->
+                    <label class="cursor-pointer relative group">
+                        <input type="radio" name="payment" value="linepay" onchange="updatePaymentInfo()" class="peer sr-only">
+                        <div class="p-4 rounded-xl border border-slate-700 bg-slate-900 hover:border-slate-500 transition-all flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-[#06C755]/20 flex items-center justify-center text-[#06C755]">
+                                    <i data-lucide="qr-code" class="w-5 h-5"></i>
+                                </div>
+                                <span class="font-medium">LINE Pay</span>
+                            </div>
+                            <i data-lucide="check-circle-2" class="check-icon w-6 h-6 text-yellow-400 opacity-0 transition-opacity"></i>
+                        </div>
+                    </label>
+
+                    <!-- Cash Option -->
+                    <label class="cursor-pointer relative group">
+                        <input type="radio" name="payment" value="cash" onchange="updatePaymentInfo()" class="peer sr-only">
+                        <div class="p-4 rounded-xl border border-slate-700 bg-slate-900 hover:border-slate-500 transition-all flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300">
+                                    <i data-lucide="coins" class="w-5 h-5"></i>
+                                </div>
+                                <span class="font-medium">現場現金付款</span>
+                            </div>
+                            <i data-lucide="check-circle-2" class="check-icon w-6 h-6 text-yellow-400 opacity-0 transition-opacity"></i>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- Dynamic Payment Details -->
+                <div class="bg-slate-900 p-6 rounded-xl border border-dashed border-slate-700 text-sm">
+                    <!-- ATM Info -->
+                    <div id="info-atm" class="payment-info">
+                        <h4 class="text-yellow-400 font-bold mb-2">匯款資訊</h4>
+                        <p class="text-slate-300 mb-1">銀行代碼：<span class="text-white font-mono">822 (中國信託)</span></p>
+                        <p class="text-slate-300 mb-4">銀行帳號：<span class="text-white font-mono select-all">123-456-789012</span></p>
+                        <div class="bg-slate-800 p-3 rounded border border-slate-700">
+                            <label class="block text-slate-400 text-xs mb-1">匯款後請填寫帳號後五碼（以利對帳）：</label>
+                            <input type="text" name="payment_note_atm" placeholder="例：12345" class="w-full bg-transparent border-none text-white focus:ring-0 p-0 font-mono" maxlength="5">
+                        </div>
+                    </div>
+
+                    <!-- LinePay Info -->
+                    <div id="info-linepay" class="payment-info hidden">
+                        <h4 class="text-[#06C755] font-bold mb-2">LINE Pay 掃碼付款</h4>
+                        <div class="flex flex-col md:flex-row gap-4 items-center">
+                            <div class="w-32 h-32 bg-white p-2 rounded-lg">
+                                <!-- Placeholder QR -->
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://line.me" alt="LINE Pay QR" class="w-full h-full object-contain">
+                            </div>
+                            <div class="text-slate-300">
+                                <p>1. 請開啟 LINE 錢包掃描左側 QR Code</p>
+                                <p>2. 輸入金額 <span class="text-yellow-400 font-bold font-mono">NT$ <span class="dynamic-price">500</span></span></p>
+                                <p>3. 付款完成後，請填寫交易序號：</p>
+                                <input type="text" name="payment_note_line" placeholder="交易序號" class="mt-2 w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cash Info -->
+                    <div id="info-cash" class="payment-info hidden">
+                        <h4 class="text-yellow-400 font-bold mb-2">現場繳費說明</h4>
+                        <p class="text-slate-300">請於活動當日報到處繳交報名費。為加速報到流程，請盡量準備<span class="text-white font-bold">剛好的金額 (NT$ <span class="dynamic-price">500</span>)</span>。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Section -->
+            <div class="pt-4">
+                <label class="flex items-center gap-3 mb-6 cursor-pointer justify-center md:justify-start">
+                    <input type="checkbox" required class="w-5 h-5 rounded border-slate-600 text-yellow-400 focus:ring-yellow-400 bg-slate-800">
+                    <span class="text-sm text-slate-400">我已確認報名資訊無誤，並同意<a href="#" class="text-yellow-400 hover:underline">個資使用條款</a>。</span>
+                </label>
+
+                <button type="submit" class="w-full bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-bold text-lg py-4 rounded-xl shadow-[0_0_20px_rgba(250,204,21,0.3)] hover:shadow-[0_0_30px_rgba(250,204,21,0.5)] transition-all transform active:scale-95 flex items-center justify-center gap-2">
+                    <span>確認送出報名</span>
+                    <i data-lucide="send" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+        </form>
+
+        <footer class="text-center text-slate-600 text-sm mt-12 pb-8">
+            <p>© 2026 電商神助手. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <!-- Logic Script -->
+    <script>
+        // Init Icons
+        lucide.createIcons();
+
+        // **已更新：您的 Apps Script URL**
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyz-L0CiDe-rvUK6S7ZmgH570-oKmiL75A1r99ElAcTpzQ8Za4Sd-8iHigNu_eZpFb3/exec';
+
+        // Variables
+        let pricePerPerson = 500;
+        let quantity = 1;
+
+        // Functions
+        function updateQuantity(change) {
+            quantity += change;
+            if (quantity < 1) quantity = 1;
+            if (quantity > 10) quantity = 10; // Limit max group size
+
+            // Update DOM
+            document.getElementById('quantityDisplay').innerText = quantity;
+            document.getElementById('quantityInput').value = quantity;
+            
+            // Update Prices
+            const total = quantity * pricePerPerson;
+            document.getElementById('totalPrice').innerText = total;
+            document.getElementById('totalPriceInput').value = total;
+            
+            // Update dynamic price text in payment instructions
+            document.querySelectorAll('.dynamic-price').forEach(el => {
+                el.innerText = total;
+            });
+        }
+
+        function updatePaymentInfo() {
+            // Hide all
+            document.querySelectorAll('.payment-info').forEach(el => el.classList.add('hidden'));
+            
+            // Get selected value
+            const selected = document.querySelector('input[name="payment"]:checked').value;
+            
+            // Show selected
+            document.getElementById(`info-${selected}`).classList.remove('hidden');
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            
+            if (SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
+                alert('請注意：網站管理員尚未設定 Google Apps Script URL，資料無法送出。');
+                return;
+            }
+
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalContent = btn.innerHTML;
+            
+            // UI Loading
+            btn.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> 資料傳送中...`;
+            lucide.createIcons();
+            btn.disabled = true;
+
+            // Prepare Data
+            const formData = new FormData(e.target);
+            
+            // Combine Payment Note logic
+            let paymentNote = '';
+            const paymentType = formData.get('payment');
+            if (paymentType === 'atm') paymentNote = formData.get('payment_note_atm');
+            if (paymentType === 'linepay') paymentNote = formData.get('payment_note_line');
+            
+            // Construct payload object matching Google Sheet columns
+            const data = {
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                line_id: formData.get('line_id'),
+                email: formData.get('email'),
+                quantity: formData.get('quantity'),
+                total_price: formData.get('total_price'),
+                payment: paymentType,
+                payment_note: paymentNote,
+                submitted_at: new Date().toISOString()
+            };
+
+            // Send to Google Sheet via Apps Script
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors', // Important for calling GAS from client-side
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams(data)
+            })
+            .then(() => {
+                // Since mode is no-cors, we assume success if no network error
+                alert('🎉 報名成功！\n\n資料已送出，我們將盡快與您聯繫。');
+                e.target.reset();
+                updateQuantity(0); // Reset UI
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('❌ 發生錯誤，請稍後再試，或直接聯繫主辦單位。');
+            })
+            .finally(() => {
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+                lucide.createIcons();
+            });
+        }
+    </script>
+</body>
+</html>
