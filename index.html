@@ -39,6 +39,17 @@
         input[type="radio"]:checked + div .check-icon {
             opacity: 1;
         }
+        /* Dropdown Icon color tweak */
+        select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-200 min-h-screen py-12 px-4 selection:bg-yellow-400 selection:text-slate-900">
@@ -68,7 +79,8 @@
                         <i data-lucide="calendar" class="w-5 h-5 text-slate-400 mt-0.5"></i>
                         <div>
                             <span class="block text-slate-400">時間</span>
-                            <strong class="text-white text-lg">12/30 13:00-16:00</strong>
+                            <strong class="text-white text-lg">多場次可選</strong>
+                            <div class="text-yellow-400 text-xs mt-1">請於下方報名資料中選擇</div>
                         </div>
                     </div>
                     <div class="flex items-start gap-3">
@@ -96,6 +108,19 @@
                 </h2>
                 
                 <div class="grid gap-6">
+                    
+                    <!-- Date Selection (New Feature) -->
+                    <div class="col-span-1 md:col-span-2">
+                        <label class="block text-sm font-medium text-yellow-400 mb-2">參加場次 (請選擇) *</label>
+                        <div class="relative">
+                            <select name="course_date" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-400 transition-colors cursor-pointer text-lg">
+                                <option value="" disabled selected>-- 請點擊選擇上課日期 --</option>
+                                <option value="2025/12/30 (二) 13:00-16:00">2025/12/30 (二) 13:00-16:00</option>
+                                <option value="2026/01/03 (六) 13:00-16:00">2026/01/03 (六) 13:00-16:00</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <!-- Name & Phone -->
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
@@ -259,7 +284,7 @@
         lucide.createIcons();
 
         // **已更新：您的 Apps Script URL**
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyz-L0CiDe-rvUK6S7ZmgH570-oKmiL75A1r99ElAcTpzQ8Za4Sd-8iHigNu_eZpFb3/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwCgkzICTffRy0bbplC4l69QNja6rWF1P2wLuU6LVfS9T2zPFwzPxEfPMRH9mqEZtWc7Q/exec';
 
         // Variables
         let pricePerPerson = 500;
@@ -323,7 +348,9 @@
             if (paymentType === 'linepay') paymentNote = formData.get('payment_note_line');
             
             // Construct payload object matching Google Sheet columns
+            // Important: We added "course_date" here
             const data = {
+                course_date: formData.get('course_date'),
                 name: formData.get('name'),
                 phone: formData.get('phone'),
                 line_id: formData.get('line_id'),
